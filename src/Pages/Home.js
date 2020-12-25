@@ -5,21 +5,21 @@ import { FaCheck, FaStar } from "react-icons/fa";
 const Home = ({ planet }) => {
     console.log("Planet", planet);
 
+    // return 0;
+
   
   // console.log(favPlanet);
 
-  let favStar = false;
   const [fav, setFav] = useState(false);
 
-
-  const fetchFavData = (e) => {
-    e.preventDefault();
-      if (!fav){
-          setFav(!favStar)
-      }
-  }
-
-  console.log(fav);
+  // const fetchIsFav = () => {
+  //   if(!fav){
+  //     // if fav is true then
+  //     setFav()
+  //   }
+  // }
+ 
+  // console.log(fav);
 
   return (
     <Container fluid>
@@ -27,14 +27,19 @@ const Home = ({ planet }) => {
         {planet.map((item) => (
           <ListGroupItem key={item.id}>
             {item.name}
-            {fav == true ? (
-              <FaStar />
+            {fav ? (
+              <span
+                style={{ float: "right" }}
+              >
+                <FaStar />
+              </span>
             ) : (
               <span
                 style={{ float: "right" }}
-                
+                id={item.id}
+                onClick={e => e.target.isFavourite ? null : setFav(!e.target.isFavourite)}
               >
-                <FaCheck onClick={fetchFavData}/>
+                <FaCheck/>
               </span>
             )}
           </ListGroupItem>

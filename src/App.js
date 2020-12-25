@@ -16,18 +16,28 @@ import Fav from "./Pages/Fav";
 import Notfound from "./Pages/Notfound";
 
 import "./App.css";
+import axios from "axios";
+
+const URL = "https://assignment-machstatz.herokuapp.com/planet";
 
 const App = () => {
   const [planet, setPlanet] = useState([]); // i used array because api main entery point is Array
 
   const fetchPlanet = async () => {
-    const {data} = await Axios.get("https://assignment-machstatz.herokuapp.com/planet");
+    const {data} = await Axios.get(URL);
     setPlanet(data);
     // console.log(planet);
   }
 
+  // const fetchIsFav = async () => {
+  //     planet.map((item) => {
+  //       item.filter
+  //     })
+  // }
+
   useEffect(() => {
     fetchPlanet();
+    // fetchIsFav();
   },[])
   return (
     <React.Fragment>
