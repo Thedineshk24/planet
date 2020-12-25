@@ -11,11 +11,11 @@ const Home = ({ planet }) => {
   // console.log(favPlanet);
 
   const [fav, setFav] = useState(false);
-
+  // let favStar = false;
   // const fetchIsFav = () => {
   //   if(!fav){
   //     // if fav is true then
-  //     setFav()
+  //     setFav(!favStar)
   //   }
   // }
  
