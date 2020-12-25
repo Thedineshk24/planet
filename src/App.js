@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
-function App() {
+
+// bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// header
+import Header from "./components/Header";
+// Home
+import Home from "./Pages/Home";
+// Fav
+import Fav from "./Pages/Fav";
+// Notfound
+import Notfound from "./Pages/Notfound";
+
+import "./App.css";
+
+const App = () => {
+  const [planet, setPlanet] = useState([]); // i used array because api main entery point is Array
+
+  const fetchPlanet = async () => {
+    const {data} = await Axios.get("https://assignment-machstatz.herokuapp.com/planet");
+    setPlanet(data);
+    // console.log(planet);
+  }
+
+  useEffect(() => {
+    fetchPlanet();
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Header />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home}>
+            <Home planet={planet} />
+          </Route>
+          <Route path="/fav" component={Fav} />
+          <Route component={Notfound} />
+        </Switch>
+      </Router>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
